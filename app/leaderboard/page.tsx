@@ -33,10 +33,6 @@ export default function LeaderboardPage() {
   const [selectedOrg, setSelectedOrg] = useState<string>('all');
   const [limit, setLimit] = useState(50);
 
-  useEffect(() => {
-    loadOrganizations();
-  }, [loadOrganizations]);
-
   const loadOrganizations = useCallback(async () => {
     try {
       const response = await fetch('/api/organizations');
@@ -46,6 +42,10 @@ export default function LeaderboardPage() {
       console.error('Error loading organizations:', error);
     }
   }, []);
+
+  useEffect(() => {
+    loadOrganizations();
+  }, [loadOrganizations]);
 
   const loadLeaderboard = useCallback(async () => {
     try {
