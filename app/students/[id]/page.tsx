@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -51,13 +51,7 @@ export default function StudentDetailsPage() {
   const [error, setError] = useState<string | null>(null);
   const [syncing, setSyncing] = useState(false);
 
-  useEffect(() => {
-    if (params.id) {
-      loadStudentDetails();
-    }
-  }, [params.id]);
-
-  const loadStudentDetails = async () => {
+  const loadStudentDetails = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -80,7 +74,13 @@ export default function StudentDetailsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [params.id]);
+
+  useEffect(() => {
+    if (params.id) {
+      loadStudentDetails();
+    }
+  }, [params.id, loadStudentDetails]);
 
   const handleSync = async () => {
     if (!details) return;
@@ -160,7 +160,7 @@ export default function StudentDetailsPage() {
               {error || 'Student not found'}
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              The student you're looking for doesn't exist or has been removed.
+              The student you&apos;re looking for doesn&apos;t exist or has been removed.
             </p>
             <Link
               href="/students"
@@ -288,7 +288,7 @@ export default function StudentDetailsPage() {
               No merged pull requests yet
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
-              This student hasn't merged any PRs yet. Click "Sync Now" to refresh data from GitHub.
+              This student hasn&apos;t merged any PRs yet. Click &quot;Sync Now&quot; to refresh data from GitHub.
             </p>
           </div>
         ) : (

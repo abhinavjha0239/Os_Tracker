@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 
@@ -54,13 +54,7 @@ export default function OrganizationDetailsPage() {
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'repos' | 'students'>('repos');
 
-  useEffect(() => {
-    if (params.id) {
-      loadOrganizationDetails();
-    }
-  }, [params.id]);
-
-  const loadOrganizationDetails = async () => {
+  const loadOrganizationDetails = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -83,7 +77,13 @@ export default function OrganizationDetailsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [params.id]);
+
+  useEffect(() => {
+    if (params.id) {
+      loadOrganizationDetails();
+    }
+  }, [params.id, loadOrganizationDetails]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -138,7 +138,7 @@ export default function OrganizationDetailsPage() {
               {error || 'Organization not found'}
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              The organization you're looking for doesn't exist or has been removed.
+              The organization you&apos;re looking for doesn&apos;t exist or has been removed.
             </p>
             <Link
               href="/organizations"
@@ -283,7 +283,7 @@ export default function OrganizationDetailsPage() {
                   No repositories yet
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400">
-                  This organization doesn't have any tracked repositories yet.
+                  This organization doesn&apos;t have any tracked repositories yet.
                 </p>
               </div>
             ) : (

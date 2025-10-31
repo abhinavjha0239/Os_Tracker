@@ -195,8 +195,8 @@ export default function AdminDashboard() {
           </h3>
           <ul className="space-y-2 text-blue-800 dark:text-blue-200">
             <li>• Add organizations first, then you can associate repositories with them</li>
-            <li>• After adding a student, click "Manage Repos" to add their repositories</li>
-            <li>• Use the "Sync" button to fetch the latest contributions from GitHub</li>
+            <li>• After adding a student, click &quot;Manage Repos&quot; to add their repositories</li>
+            <li>• Use the &quot;Sync&quot; button to fetch the latest contributions from GitHub</li>
             <li>• Repository format: owner/repo or full GitHub URL (e.g., openMF/web-app)</li>
             <li>• Only merged pull requests are counted in the leaderboard and statistics</li>
           </ul>

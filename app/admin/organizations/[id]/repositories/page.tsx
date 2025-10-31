@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 
@@ -39,15 +39,7 @@ export default function ManageOrgRepositoriesPage() {
   });
   const [submitting, setSubmitting] = useState(false);
 
-  useEffect(() => {
-    if (params.id) {
-      loadOrganization();
-      loadRepositories();
-      loadStudents();
-    }
-  }, [params.id]);
-
-  const loadOrganization = async () => {
+  const loadOrganization = useCallback(async () => {
     try {
       const response = await fetch(`/api/organizations/${params.id}/details`);
       const data = await response.json();
@@ -56,9 +48,9 @@ export default function ManageOrgRepositoriesPage() {
       console.error('Error loading organization:', error);
       alert('Failed to load organization');
     }
-  };
+  }, [params.id]);
 
-  const loadRepositories = async () => {
+  const loadRepositories = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch(`/api/repositories?organization_id=${params.id}`);
@@ -69,9 +61,9 @@ export default function ManageOrgRepositoriesPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [params.id]);
 
-  const loadStudents = async () => {
+  const loadStudents = useCallback(async () => {
     try {
       const response = await fetch('/api/students');
       const data = await response.json();
@@ -79,7 +71,15 @@ export default function ManageOrgRepositoriesPage() {
     } catch (error) {
       console.error('Error loading students:', error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (params.id) {
+      loadOrganization();
+      loadRepositories();
+      loadStudents();
+    }
+  }, [params.id, loadOrganization, loadRepositories, loadStudents]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -226,7 +226,7 @@ export default function ManageOrgRepositoriesPage() {
                   ))}
                 </select>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  The repository will be tracked for this student's contributions
+                  The repository will be tracked for this student&apos;s contributions
                 </p>
               </div>
 

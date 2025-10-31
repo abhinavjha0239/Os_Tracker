@@ -16,9 +16,7 @@ export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    if (mobileOpen) {
-      setMobileOpen(false);
-    }
+    setMobileOpen(false);
   }, [pathname]);
 
   const isActive = (href: string) => {

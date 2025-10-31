@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 
 const numberFormatter = new Intl.NumberFormat('en-US', {
@@ -35,13 +35,9 @@ export default function LeaderboardPage() {
 
   useEffect(() => {
     loadOrganizations();
-  }, []);
+  }, [loadOrganizations]);
 
-  useEffect(() => {
-    loadLeaderboard();
-  }, [selectedPeriod, selectedOrg, limit]);
-
-  const loadOrganizations = async () => {
+  const loadOrganizations = useCallback(async () => {
     try {
       const response = await fetch('/api/organizations');
       const data = await response.json();
@@ -49,9 +45,9 @@ export default function LeaderboardPage() {
     } catch (error) {
       console.error('Error loading organizations:', error);
     }
-  };
+  }, []);
 
-  const loadLeaderboard = async () => {
+  const loadLeaderboard = useCallback(async () => {
     try {
       setLoading(true);
       let url = `/api/leaderboard?limit=${limit}`;
@@ -75,7 +71,11 @@ export default function LeaderboardPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedPeriod, selectedOrg, limit]);
+
+  useEffect(() => {
+    loadLeaderboard();
+  }, [loadLeaderboard]);
 
   const getMedalColor = (rank: number) => {
     if (rank === 1) return 'from-yellow-400 to-orange-500';

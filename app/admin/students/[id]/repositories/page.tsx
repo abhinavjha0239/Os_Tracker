@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -41,13 +41,7 @@ export default function ManageRepositoriesPage() {
   const [submitting, setSubmitting] = useState(false);
   const [syncing, setSyncing] = useState<number | null>(null);
 
-  useEffect(() => {
-    if (params.id) {
-      loadData();
-    }
-  }, [params.id]);
-
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     try {
       setLoading(true);
       const [studentRes, reposRes, orgsRes] = await Promise.all([
@@ -73,7 +67,13 @@ export default function ManageRepositoriesPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [params.id]);
+
+  useEffect(() => {
+    if (params.id) {
+      loadData();
+    }
+  }, [params.id, loadData]);
 
   const parseRepoUrl = (url: string): { owner: string; repo: string } | null => {
     // Support formats: owner/repo, https://github.com/owner/repo, https://github.com/owner/repo.git
@@ -350,7 +350,7 @@ export default function ManageRepositoriesPage() {
               No repositories yet
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              Add repositories to track this student's contributions
+              Add repositories to track this student&apos;s contributions
             </p>
             <button
               onClick={() => setShowForm(true)}

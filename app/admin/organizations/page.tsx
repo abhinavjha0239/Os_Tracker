@@ -149,7 +149,7 @@ export default function ManageOrganizationsPage() {
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  The GitHub organization username (e.g., "openMF" from github.com/openMF)
+                  The GitHub organization username (e.g., &quot;openMF&quot; from github.com/openMF)
                 </p>
               </div>
 
