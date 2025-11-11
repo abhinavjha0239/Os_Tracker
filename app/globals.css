@@ -3,20 +3,34 @@
 @tailwind utilities;
 
 :root {
-  --background: #000000;
-  --foreground: #ededed;
+  /* Pastel Background Colors */
+  --background: #fafaf9;
+  --foreground: #44403c;
+
+  /* Primary Pastel Palette */
+  --pastel-mint: #b8e6d3;
+  --pastel-peach: #ffd6cc;
+  --pastel-sky: #c3e7ff;
+  --pastel-lavender: #e5d4ff;
+  --pastel-rose: #ffd4e5;
+  --pastel-lemon: #fff5d6;
+  --pastel-sage: #d4e6d4;
+  --pastel-powder: #e6d9ff;
+  --pastel-coral: #ffccb3;
+  --pastel-pearl: #f5f3f0;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #000000;
-    --foreground: #ededed;
+    --background: #1c1917;
+    --foreground: #f5f5f4;
   }
 }
 
 body {
   color: var(--foreground);
-  background: #000000;
+  background: linear-gradient(135deg, #f0f4ff 0%, #fff5d6 25%, #ffd4e5 50%, #e5d4ff 75%, #c3e7ff 100%);
+  background-attachment: fixed;
   min-height: 100vh;
 }
 
@@ -27,15 +41,94 @@ body {
 }
 
 @layer components {
+  /* Glass morphism with pastel tints */
   .glass-card {
-    @apply bg-white/90 dark:bg-slate-900/70 backdrop-blur-2xl border border-white/70 dark:border-slate-800/70 shadow-[0_18px_45px_-24px_rgba(15,23,42,0.35)];
+    @apply bg-white/80 backdrop-blur-xl border border-white/30 shadow-lg shadow-pastel-lavender/20;
   }
 
+  .glass-card-hover {
+    @apply hover:bg-white/90 hover:shadow-xl hover:shadow-pastel-lavender/30 transition-all duration-300;
+  }
+
+  /* Pastel buttons */
+  .btn-pastel-primary {
+    @apply bg-gradient-to-r from-pastel-lavender to-pastel-sky text-gray-700 hover:from-pastel-sky hover:to-pastel-lavender transition-all duration-300 shadow-md hover:shadow-lg;
+  }
+
+  .btn-pastel-secondary {
+    @apply bg-gradient-to-r from-pastel-peach to-pastel-rose text-gray-700 hover:from-pastel-rose hover:to-pastel-peach transition-all duration-300 shadow-md hover:shadow-lg;
+  }
+
+  .btn-pastel-success {
+    @apply bg-gradient-to-r from-pastel-mint to-pastel-sage text-gray-700 hover:from-pastel-sage hover:to-pastel-mint transition-all duration-300 shadow-md hover:shadow-lg;
+  }
+
+  /* Typography with pastel accents */
   .section-heading {
-    @apply text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white;
+    @apply text-3xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent;
   }
 
   .muted-copy {
-    @apply text-base sm:text-lg text-slate-600 dark:text-slate-400;
+    @apply text-base sm:text-lg text-gray-600;
+  }
+
+  /* Pastel cards */
+  .pastel-card-mint {
+    @apply bg-gradient-to-br from-pastel-mint/30 to-pastel-mint/10 backdrop-blur-sm border border-pastel-mint/20;
+  }
+
+  .pastel-card-peach {
+    @apply bg-gradient-to-br from-pastel-peach/30 to-pastel-peach/10 backdrop-blur-sm border border-pastel-peach/20;
+  }
+
+  .pastel-card-sky {
+    @apply bg-gradient-to-br from-pastel-sky/30 to-pastel-sky/10 backdrop-blur-sm border border-pastel-sky/20;
+  }
+
+  .pastel-card-lavender {
+    @apply bg-gradient-to-br from-pastel-lavender/30 to-pastel-lavender/10 backdrop-blur-sm border border-pastel-lavender/20;
+  }
+
+  /* Input styles with pastel focus */
+  .input-pastel {
+    @apply bg-white/70 border border-gray-200 focus:border-pastel-lavender focus:ring-2 focus:ring-pastel-lavender/30 transition-all duration-200;
+  }
+
+  /* Pastel badges */
+  .badge-pastel {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-pastel-mint {
+    @apply bg-pastel-mint/30 text-green-800 border border-pastel-mint/50;
+  }
+
+  .badge-pastel-peach {
+    @apply bg-pastel-peach/30 text-orange-800 border border-pastel-peach/50;
+  }
+
+  .badge-pastel-sky {
+    @apply bg-pastel-sky/30 text-blue-800 border border-pastel-sky/50;
+  }
+
+  .badge-pastel-lavender {
+    @apply bg-pastel-lavender/30 text-purple-800 border border-pastel-lavender/50;
+  }
+
+  /* Pastel gradients for backgrounds */
+  .bg-gradient-pastel-soft {
+    @apply bg-gradient-to-br from-pastel-pearl via-white to-pastel-lemon/20;
+  }
+
+  .bg-gradient-pastel-vibrant {
+    @apply bg-gradient-to-br from-pastel-lavender/20 via-pastel-sky/20 to-pastel-mint/20;
+  }
+
+  .bg-gradient-pastel-warm {
+    @apply bg-gradient-to-br from-pastel-peach/20 via-pastel-coral/20 to-pastel-lemon/20;
+  }
+
+  .bg-gradient-pastel-cool {
+    @apply bg-gradient-to-br from-pastel-sky/20 via-pastel-lavender/20 to-pastel-powder/20;
   }
 }

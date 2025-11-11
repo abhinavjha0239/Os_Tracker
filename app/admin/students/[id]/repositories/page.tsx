@@ -182,11 +182,13 @@ export default function ManageRepositoriesPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black py-8">
+      <div className="min-h-screen py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 dark:bg-gray-800 rounded w-1/4 mb-4"></div>
-            <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded w-1/3 mb-8"></div>
+          <div className="glass-card rounded-2xl p-8">
+            <div className="animate-pulse space-y-4">
+              <div className="h-8 bg-gray-200/50 rounded-xl w-1/4"></div>
+              <div className="h-4 bg-gray-200/50 rounded-xl w-1/3"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -195,15 +197,15 @@ export default function ManageRepositoriesPage() {
 
   if (!student) {
     return (
-      <div className="min-h-screen bg-black py-8">
+      <div className="min-h-screen py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-12 text-center">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+          <div className="glass-card rounded-2xl p-12 text-center">
+            <h3 className="text-lg font-medium text-gray-900 mb-2">
               Student not found
             </h3>
             <Link
               href="/admin/students"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-primary-600 hover:text-primary-700 hover:underline"
             >
               ← Back to Students
             </Link>
@@ -214,44 +216,44 @@ export default function ManageRepositoriesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black py-8">
+    <div className="min-h-screen py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <nav className="mb-6 text-sm">
-          <ol className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
+          <ol className="flex items-center space-x-2 text-gray-600">
             <li>
-              <Link href="/admin/students" className="hover:text-blue-600 dark:hover:text-blue-400">
+              <Link href="/admin/students" className="hover:text-primary-600">
                 Manage Students
               </Link>
             </li>
             <li>
               <span className="mx-2">/</span>
             </li>
-            <li className="text-gray-900 dark:text-white font-medium">
+            <li className="text-gray-900 font-medium">
               {student.student_name || student.github_username}
             </li>
           </ol>
         </nav>
 
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 mb-6">
+        <div className="glass-card rounded-2xl p-6 mb-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-pastel-lavender to-pastel-sky rounded-2xl flex items-center justify-center text-gray-700 font-bold text-2xl mr-4">
                 {(student.student_name || student.github_username).charAt(0).toUpperCase()}
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
                   Manage Repositories
                 </h1>
-                <p className="text-lg text-gray-600 dark:text-gray-400">
+                <p className="text-lg text-gray-600">
                   {student.student_name || student.github_username} (@{student.github_username})
                 </p>
               </div>
             </div>
             <button
               onClick={() => setShowForm(!showForm)}
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+              className="px-6 py-3 bg-gradient-to-r from-pastel-lavender to-pastel-sky text-gray-700 rounded-xl hover:from-pastel-sky hover:to-pastel-lavender transition-all shadow-md font-medium"
             >
               {showForm ? 'Cancel' : '+ Add Repository'}
             </button>
@@ -260,13 +262,13 @@ export default function ManageRepositoriesPage() {
 
         {/* Add Form */}
         {showForm && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 mb-6">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+          <div className="glass-card rounded-2xl p-6 mb-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">
               Add New Repository
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="repository_url" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="repository_url" className="block text-sm font-medium text-gray-700 mb-2">
                   Repository URL or Path *
                 </label>
                 <input
@@ -276,22 +278,22 @@ export default function ManageRepositoriesPage() {
                   onChange={(e) => setFormData({ ...formData, repository_url: e.target.value })}
                   placeholder="e.g., openMF/web-app or https://github.com/openMF/web-app"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 input-pastel rounded-xl"
                 />
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                <p className="text-sm text-gray-500 mt-1">
                   Supported formats: owner/repo, https://github.com/owner/repo, or https://github.com/owner/repo.git
                 </p>
               </div>
 
               <div>
-                <label htmlFor="organization_id" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="organization_id" className="block text-sm font-medium text-gray-700 mb-2">
                   Organization (Optional)
                 </label>
                 <select
                   id="organization_id"
                   value={formData.organization_id}
                   onChange={(e) => setFormData({ ...formData, organization_id: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 input-pastel rounded-xl"
                 >
                   <option value="">None</option>
                   {organizations.map((org) => (
@@ -300,7 +302,7 @@ export default function ManageRepositoriesPage() {
                     </option>
                   ))}
                 </select>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                <p className="text-sm text-gray-500 mt-1">
                   Associate this repository with an organization
                 </p>
               </div>
@@ -309,7 +311,7 @@ export default function ManageRepositoriesPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors font-medium"
+                  className="px-6 py-2 btn-pastel-primary rounded-xl disabled:bg-gray-400 disabled:cursor-not-allowed font-medium"
                 >
                   {submitting ? 'Adding...' : 'Add Repository'}
                 </button>
@@ -319,7 +321,7 @@ export default function ManageRepositoriesPage() {
                     setFormData({ repository_url: '', organization_id: '' });
                     setShowForm(false);
                   }}
-                  className="px-6 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-medium"
+                  className="px-6 py-2 bg-white/70 text-gray-700 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all font-medium"
                 >
                   Cancel
                 </button>
@@ -330,8 +332,8 @@ export default function ManageRepositoriesPage() {
 
         {/* Repositories List */}
         {repositories.length === 0 ? (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-12 text-center">
-            <div className="text-gray-400 dark:text-gray-600 mb-4">
+          <div className="glass-card rounded-2xl p-12 text-center">
+            <div className="text-gray-400 mb-4">
               <svg
                 className="mx-auto h-16 w-16"
                 fill="none"
@@ -346,49 +348,49 @@ export default function ManageRepositoriesPage() {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2">
+            <h3 className="text-xl font-medium text-gray-900 mb-2">
               No repositories yet
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <p className="text-gray-600 mb-6">
               Add repositories to track this student&apos;s contributions
             </p>
             <button
               onClick={() => setShowForm(true)}
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+              className="px-6 py-3 btn-pastel-primary rounded-xl font-medium shadow-md"
             >
               + Add First Repository
             </button>
           </div>
         ) : (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+          <div className="glass-card rounded-2xl overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+                <thead className="bg-gradient-to-r from-pastel-lavender/20 to-pastel-sky/20 border-b border-gray-200">
                   <tr>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
                       Repository
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
                       Organization
                     </th>
-                    <th className="px-6 py-4 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-right text-xs font-medium text-gray-600 uppercase tracking-wider">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody className="divide-y divide-gray-200">
                   {repositories.map((repo) => (
-                    <tr key={repo.id} className="hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors">
+                    <tr key={repo.id} className="hover:bg-pastel-pearl/50 transition-colors">
                       <td className="px-6 py-4">
                         <div>
-                          <div className="text-sm font-medium text-gray-900 dark:text-white">
+                          <div className="text-sm font-medium text-gray-900">
                             {repo.name}
                           </div>
                           <a
                             href={`https://github.com/${repo.full_name}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                            className="text-sm text-primary-600 hover:text-primary-700 hover:underline"
                           >
                             {repo.full_name} →
                           </a>
@@ -396,11 +398,11 @@ export default function ManageRepositoriesPage() {
                       </td>
                       <td className="px-6 py-4">
                         {repo.organization_name ? (
-                          <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-400">
+                          <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-pastel-powder/30 text-purple-700">
                             {repo.organization_name}
                           </span>
                         ) : (
-                          <span className="text-sm text-gray-400 dark:text-gray-600">
+                          <span className="text-sm text-gray-400">
                             None
                           </span>
                         )}
@@ -410,13 +412,13 @@ export default function ManageRepositoriesPage() {
                           <button
                             onClick={() => handleSync(repo.id)}
                             disabled={syncing === repo.id}
-                            className="px-3 py-1 text-sm bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded hover:bg-green-200 dark:hover:bg-green-900/50 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                            className="px-3 py-1 text-sm bg-pastel-mint/30 text-green-700 rounded-lg hover:bg-pastel-mint/50 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
                           >
                             {syncing === repo.id ? 'Syncing...' : 'Sync'}
                           </button>
                           <button
                             onClick={() => handleDelete(repo.id, repo.full_name)}
-                            className="px-3 py-1 text-sm bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors"
+                            className="px-3 py-1 text-sm bg-pastel-rose/30 text-red-700 rounded-lg hover:bg-pastel-rose/50 transition-colors"
                           >
                             Delete
                           </button>

@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(npm run backup:*)",
+      "Bash(npx tsx:*)",
+      "Bash(node:*)",
+      "Bash(tree:*)",
+      "Bash(dir:*)",
+      "Bash(ls -la \"D:\\os\\app\\students\"\" && ls -la \"D:osapporganizations\"\")",
+      "Bash(nul)",
+      "Bash(findstr:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

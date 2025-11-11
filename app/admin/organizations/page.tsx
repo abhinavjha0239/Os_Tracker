@@ -80,29 +80,29 @@ export default function ManageOrganizationsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black py-8">
+    <div className="min-h-screen py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent mb-2">
                 Manage Organizations
               </h1>
-              <p className="text-lg text-gray-600 dark:text-gray-400">
+              <p className="text-lg text-gray-600">
                 Add or view open-source organizations
               </p>
             </div>
             <div className="flex gap-3">
               <Link
                 href="/admin/students"
-                className="px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-medium"
+                className="px-6 py-3 bg-white/70 text-gray-700 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all font-medium"
               >
                 Manage Students
               </Link>
               <button
                 onClick={() => setShowForm(!showForm)}
-                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                className="px-6 py-3 bg-gradient-to-r from-pastel-lavender to-pastel-sky text-gray-700 rounded-xl hover:from-pastel-sky hover:to-pastel-lavender transition-all shadow-md font-medium"
               >
                 {showForm ? 'Cancel' : '+ Add Organization'}
               </button>
@@ -112,13 +112,13 @@ export default function ManageOrganizationsPage() {
 
         {/* Add Form */}
         {showForm && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 mb-6">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+          <div className="glass-card rounded-2xl p-6 mb-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">
               Add New Organization
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                   Display Name *
                 </label>
                 <input
@@ -128,15 +128,15 @@ export default function ManageOrganizationsPage() {
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g., Mifos Initiative"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 input-pastel rounded-xl"
                 />
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                <p className="text-sm text-gray-500 mt-1">
                   The full name or display name of the organization
                 </p>
               </div>
 
               <div>
-                <label htmlFor="github_org_name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="github_org_name" className="block text-sm font-medium text-gray-700 mb-2">
                   GitHub Organization Name *
                 </label>
                 <input
@@ -146,9 +146,9 @@ export default function ManageOrganizationsPage() {
                   onChange={(e) => setFormData({ ...formData, github_org_name: e.target.value })}
                   placeholder="e.g., openMF"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 input-pastel rounded-xl"
                 />
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                <p className="text-sm text-gray-500 mt-1">
                   The GitHub organization username (e.g., &quot;openMF&quot; from github.com/openMF)
                 </p>
               </div>
@@ -157,14 +157,14 @@ export default function ManageOrganizationsPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors font-medium"
+                  className="px-6 py-2 btn-pastel-primary rounded-xl disabled:bg-gray-400 disabled:cursor-not-allowed font-medium"
                 >
                   {submitting ? 'Adding...' : 'Add Organization'}
                 </button>
                 <button
                   type="button"
                   onClick={handleCancel}
-                  className="px-6 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-medium"
+                  className="px-6 py-2 bg-white/70 text-gray-700 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all font-medium"
                 >
                   Cancel
                 </button>
@@ -175,16 +175,16 @@ export default function ManageOrganizationsPage() {
 
         {/* Organizations List */}
         {loading ? (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
+          <div className="glass-card rounded-2xl p-8">
             <div className="animate-pulse space-y-4">
               {[...Array(5)].map((_, i) => (
-                <div key={i} className="h-16 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                <div key={i} className="h-16 bg-gray-200/50 rounded-xl"></div>
               ))}
             </div>
           </div>
         ) : organizations.length === 0 ? (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-12 text-center">
-            <div className="text-gray-400 dark:text-gray-600 mb-4">
+          <div className="glass-card rounded-2xl p-12 text-center">
+            <div className="text-gray-400 mb-4">
               <svg
                 className="mx-auto h-16 w-16"
                 fill="none"
@@ -199,15 +199,15 @@ export default function ManageOrganizationsPage() {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2">
+            <h3 className="text-xl font-medium text-gray-900 mb-2">
               No organizations yet
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <p className="text-gray-600 mb-6">
               Get started by adding your first organization
             </p>
             <button
               onClick={() => setShowForm(true)}
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+              className="px-6 py-3 btn-pastel-primary rounded-xl font-medium shadow-md"
             >
               + Add First Organization
             </button>
@@ -217,13 +217,13 @@ export default function ManageOrganizationsPage() {
             {organizations.map((org) => (
               <div
                 key={org.id}
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden"
+                className="glass-card rounded-2xl hover:shadow-xl transition-shadow overflow-hidden"
               >
-                <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-4">
-                  <h3 className="text-xl font-semibold text-white truncate">
+                <div className="bg-gradient-to-r from-pastel-sky to-pastel-lavender px-6 py-4">
+                  <h3 className="text-xl font-semibold text-gray-700 truncate">
                     {org.name}
                   </h3>
-                  <p className="text-blue-100 text-sm truncate">
+                  <p className="text-gray-600 text-sm truncate">
                     @{org.github_org_name}
                   </p>
                 </div>
@@ -234,7 +234,7 @@ export default function ManageOrganizationsPage() {
                       href={`https://github.com/${org.github_org_name}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                      className="text-sm text-primary-600 hover:underline"
                     >
                       View on GitHub →
                     </a>
@@ -243,13 +243,13 @@ export default function ManageOrganizationsPage() {
                   <div className="flex gap-2">
                     <Link
                       href={`/organizations/${org.id}`}
-                      className="flex-1 text-center px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors font-medium text-sm"
+                      className="flex-1 text-center px-4 py-2 bg-pastel-sky/30 text-blue-700 rounded-lg hover:bg-pastel-sky/50 transition-colors font-medium text-sm"
                     >
                       View Details
                     </Link>
                     <Link
                       href={`/admin/organizations/${org.id}/repositories`}
-                      className="flex-1 text-center px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors font-medium text-sm"
+                      className="flex-1 text-center px-4 py-2 bg-pastel-mint/30 text-green-700 rounded-lg hover:bg-pastel-mint/50 transition-colors font-medium text-sm"
                     >
                       Manage Repos
                     </Link>

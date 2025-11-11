@@ -117,16 +117,16 @@ export default function StudentDetailsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black py-8">
+      <div className="min-h-screen py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 dark:bg-gray-800 rounded w-1/4 mb-4"></div>
-            <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded w-1/3 mb-8"></div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8">
-              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-4"></div>
+            <div className="h-8 bg-gray-200 rounded w-1/4 mb-4"></div>
+            <div className="h-4 bg-gray-200 rounded w-1/3 mb-8"></div>
+            <div className="glass-card rounded-2xl p-8">
+              <div className="h-6 bg-gray-200 rounded w-1/2 mb-4"></div>
               <div className="space-y-3">
                 {[...Array(5)].map((_, i) => (
-                  <div key={i} className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                  <div key={i} className="h-4 bg-gray-200 rounded"></div>
                 ))}
               </div>
             </div>
@@ -138,10 +138,10 @@ export default function StudentDetailsPage() {
 
   if (error || !details) {
     return (
-      <div className="min-h-screen bg-black py-8">
+      <div className="min-h-screen py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-12 text-center">
-            <div className="text-red-500 dark:text-red-400 mb-4">
+          <div className="glass-card rounded-2xl p-12 text-center">
+            <div className="text-red-500 mb-4">
               <svg
                 className="mx-auto h-12 w-12"
                 fill="none"
@@ -156,15 +156,15 @@ export default function StudentDetailsPage() {
                 />
               </svg>
             </div>
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+            <h3 className="text-lg font-medium text-gray-900 mb-2">
               {error || 'Student not found'}
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <p className="text-gray-600 mb-6">
               The student you&apos;re looking for doesn&apos;t exist or has been removed.
             </p>
             <Link
               href="/students"
-              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-pastel-lavender to-pastel-sky text-white rounded-lg hover:from-pastel-lavender/90 hover:to-pastel-sky/90 transition-all"
             >
               ← Back to Students
             </Link>
@@ -175,13 +175,13 @@ export default function StudentDetailsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black py-8">
+    <div className="min-h-screen py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <nav className="mb-6 text-sm">
-          <ol className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
+          <ol className="flex items-center space-x-2 text-gray-600">
             <li>
-              <Link href="/" className="hover:text-blue-600 dark:hover:text-blue-400">
+              <Link href="/" className="hover:text-primary-600 transition-colors">
                 Home
               </Link>
             </li>
@@ -189,37 +189,37 @@ export default function StudentDetailsPage() {
               <span className="mx-2">/</span>
             </li>
             <li>
-              <Link href="/students" className="hover:text-blue-600 dark:hover:text-blue-400">
+              <Link href="/students" className="hover:text-primary-600 transition-colors">
                 Students
               </Link>
             </li>
             <li>
               <span className="mx-2">/</span>
             </li>
-            <li className="text-gray-900 dark:text-white font-medium">
+            <li className="text-gray-900 font-medium">
               {details.student.student_name || details.student.github_username}
             </li>
           </ol>
         </nav>
 
         {/* Header Section */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8 mb-6">
+        <div className="glass-card rounded-2xl p-8 mb-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
             <div className="flex items-center mb-4 md:mb-0">
-              <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-3xl mr-4">
+              <div className="w-20 h-20 bg-gradient-to-br from-pastel-lavender to-pastel-sky rounded-2xl flex items-center justify-center text-white font-bold text-3xl mr-4 shadow-lg">
                 {(details.student.student_name || details.student.github_username)
                   .charAt(0)
                   .toUpperCase()}
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
                   {details.student.student_name || details.student.github_username}
                 </h1>
-                <p className="text-lg text-gray-600 dark:text-gray-400">
+                <p className="text-lg text-gray-600">
                   @{details.student.github_username}
                 </p>
                 {details.student.email && (
-                  <p className="text-sm text-gray-500 dark:text-gray-500 mt-1">
+                  <p className="text-sm text-gray-500 mt-1">
                     {details.student.email}
                   </p>
                 )}
@@ -229,14 +229,14 @@ export default function StudentDetailsPage() {
             <div className="flex gap-3">
               <Link
                 href="/students"
-                className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                className="px-4 py-2 bg-white/70 text-gray-700 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all"
               >
                 ← Back
               </Link>
               <button
                 onClick={handleSync}
                 disabled={syncing}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                className="px-4 py-2 bg-gradient-to-r from-pastel-lavender to-pastel-sky text-white rounded-xl hover:from-pastel-lavender/90 hover:to-pastel-sky/90 disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed transition-all shadow-md"
               >
                 {syncing ? 'Syncing...' : 'Sync Now'}
               </button>
@@ -246,30 +246,30 @@ export default function StudentDetailsPage() {
 
         {/* Summary Stats */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
-            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
+          <div className="glass-card rounded-2xl p-6">
+            <div className="text-3xl font-bold text-green-600 mb-2">
               {details.summary.total_merged_prs}
             </div>
-            <div className="text-gray-600 dark:text-gray-400">Total PRs Merged</div>
+            <div className="text-gray-600">Total PRs Merged</div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
-            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
+          <div className="glass-card rounded-2xl p-6">
+            <div className="text-3xl font-bold text-blue-600 mb-2">
               {details.summary.total_organizations}
             </div>
-            <div className="text-gray-600 dark:text-gray-400">Organizations</div>
+            <div className="text-gray-600">Organizations</div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
-            <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
+          <div className="glass-card rounded-2xl p-6">
+            <div className="text-3xl font-bold text-purple-600 mb-2">
               {details.summary.total_repositories}
             </div>
-            <div className="text-gray-600 dark:text-gray-400">Repositories</div>
+            <div className="text-gray-600">Repositories</div>
           </div>
         </div>
 
         {/* PRs Organized by Organization and Repository */}
         {details.summary.total_merged_prs === 0 ? (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-12 text-center">
-            <div className="text-gray-400 dark:text-gray-600 mb-4">
+          <div className="glass-card rounded-2xl p-12 text-center">
+            <div className="text-gray-400 mb-4">
               <svg
                 className="mx-auto h-16 w-16"
                 fill="none"
@@ -284,26 +284,26 @@ export default function StudentDetailsPage() {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2">
+            <h3 className="text-xl font-medium text-gray-900 mb-2">
               No merged pull requests yet
             </h3>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600">
               This student hasn&apos;t merged any PRs yet. Click &quot;Sync Now&quot; to refresh data from GitHub.
             </p>
           </div>
         ) : (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-2xl font-bold text-gray-900">
               Merged Pull Requests
             </h2>
 
             {details.organizations.map((org) => (
               <div
                 key={org.id || org.name}
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden"
+                className="glass-card rounded-2xl overflow-hidden"
               >
                 {/* Organization Header */}
-                <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-4">
+                <div className="bg-gradient-to-r from-pastel-lavender to-pastel-sky px-6 py-4">
                   <h3 className="text-xl font-semibold text-white flex items-center">
                     <svg
                       className="w-5 h-5 mr-2"
@@ -314,18 +314,18 @@ export default function StudentDetailsPage() {
                     </svg>
                     {org.name}
                   </h3>
-                  <p className="text-blue-100 text-sm mt-1">
+                  <p className="text-white/80 text-sm mt-1">
                     {org.repositories.length} {org.repositories.length === 1 ? 'repository' : 'repositories'}
                   </p>
                 </div>
 
                 {/* Repositories */}
-                <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                <div className="divide-y divide-gray-100">
                   {org.repositories.map((repo) => (
                     <div key={repo.id} className="p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div>
-                          <h4 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
+                          <h4 className="text-lg font-semibold text-gray-900 flex items-center">
                             <svg
                               className="w-5 h-5 mr-2 text-gray-400"
                               fill="currentColor"
@@ -339,12 +339,12 @@ export default function StudentDetailsPage() {
                             href={`https://github.com/${repo.full_name}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                            className="text-sm text-primary-600 hover:underline"
                           >
                             {repo.full_name} →
                           </a>
                         </div>
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-pastel-mint/20 text-green-700">
                           {repo.prs.length} {repo.prs.length === 1 ? 'PR' : 'PRs'}
                         </span>
                       </div>
@@ -354,11 +354,11 @@ export default function StudentDetailsPage() {
                         {repo.prs.map((pr) => (
                           <div
                             key={pr.id}
-                            className="flex items-start bg-gray-50 dark:bg-gray-900 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                            className="flex items-start bg-gray-50 rounded-xl p-4 hover:bg-gray-100 transition-colors"
                           >
                             <div className="flex-shrink-0 mt-1">
                               <svg
-                                className="w-5 h-5 text-purple-600 dark:text-purple-400"
+                                className="w-5 h-5 text-purple-600"
                                 fill="currentColor"
                                 viewBox="0 0 24 24"
                               >
@@ -370,11 +370,11 @@ export default function StudentDetailsPage() {
                                 href={pr.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-sm font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400"
+                                className="text-sm font-medium text-gray-900 hover:text-primary-600"
                               >
                                 {pr.title}
                               </a>
-                              <div className="mt-1 flex items-center text-xs text-gray-500 dark:text-gray-400">
+                              <div className="mt-1 flex items-center text-xs text-gray-500">
                                 <span className="font-mono">#{pr.pr_number}</span>
                                 <span className="mx-2">•</span>
                                 <span>Merged on {formatDate(pr.updated_at)}</span>
@@ -384,7 +384,7 @@ export default function StudentDetailsPage() {
                               href={pr.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="ml-4 flex-shrink-0 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
+                              className="ml-4 flex-shrink-0 text-primary-600 hover:text-primary-700"
                             >
                               <svg
                                 className="w-5 h-5"

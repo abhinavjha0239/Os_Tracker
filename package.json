@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "init-db": "tsx scripts/init-db.ts",
-    "sync": "tsx scripts/sync-contributions.ts"
+    "sync": "tsx scripts/sync-contributions.ts",
+    "backup": "tsx scripts/backup-db.ts",
+    "restore": "tsx scripts/restore-db.ts"
   },
   "dependencies": {
     "@octokit/rest": "^20.0.0",
