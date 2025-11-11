@@ -221,7 +221,7 @@ export async function PUT(request: NextRequest) {
 
     const allowedUpdates = ['is_active', 'max_mentees'];
     const updateClauses = [];
-    const params = [mentorIds];
+    const params: any[] = [mentorIds];
     let paramCount = 1;
 
     for (const [key, value] of Object.entries(updates)) {
