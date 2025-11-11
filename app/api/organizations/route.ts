@@ -4,10 +4,27 @@ import { Organization } from '@/lib/db-types';
 
 export async function GET() {
   try {
-    const result = await pool.query<Organization>(
-      `SELECT * FROM organizations ORDER BY name`
-    );
-    return NextResponse.json(result.rows);
+    const result = await pool.query(`
+      SELECT 
+        o.*,
+        COUNT(DISTINCT r.student_id) as student_count,
+        COUNT(DISTINCT r.id) as repo_count,
+        COUNT(DISTINCT c.id) FILTER (WHERE c.type = 'pull_request' AND c.state = 'merged') as merged_prs_count
+      FROM organizations o
+      LEFT JOIN repositories r ON r.organization_id = o.id
+      LEFT JOIN contributions c ON c.repository_id = r.id
+      GROUP BY o.id
+      ORDER BY o.name
+    `);
+    
+    const organizations = result.rows.map((row: any) => ({
+      ...row,
+      student_count: parseInt(row.student_count) || 0,
+      repo_count: parseInt(row.repo_count) || 0,
+      merged_prs_count: parseInt(row.merged_prs_count) || 0
+    }));
+    
+    return NextResponse.json({ organizations });
   } catch (error: any) {
     console.error('Error fetching organizations:', error);
     return NextResponse.json(

@@ -4,10 +4,23 @@ import { Student } from '@/lib/db-types';
 
 export async function GET() {
   try {
-    const result = await pool.query<Student>(
-      `SELECT * FROM students ORDER BY created_at DESC`
-    );
-    return NextResponse.json(result.rows);
+    const result = await pool.query(`
+      SELECT 
+        s.*,
+        COUNT(DISTINCT c.id) FILTER (WHERE c.type = 'pull_request' AND c.state = 'merged') as merged_prs_count
+      FROM students s
+      LEFT JOIN repositories r ON r.student_id = s.id
+      LEFT JOIN contributions c ON c.repository_id = r.id
+      GROUP BY s.id
+      ORDER BY s.created_at DESC
+    `);
+    
+    const students = result.rows.map((row: any) => ({
+      ...row,
+      merged_prs_count: parseInt(row.merged_prs_count) || 0
+    }));
+    
+    return NextResponse.json({ students });
   } catch (error: any) {
     console.error('Error fetching students:', error);
     return NextResponse.json(
