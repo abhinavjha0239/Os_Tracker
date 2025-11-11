@@ -44,7 +44,7 @@ export default function StudentsPage() {
 
       // Extract unique organizations
       const studentsData = data.students || data || [];
-      const orgs = [...new Set(studentsData.map((s: Student) => s.organization_name).filter(Boolean))];
+      const orgs = Array.from(new Set(studentsData.map((s: Student) => s.organization_name).filter(Boolean))) as string[];
       setOrganizations(orgs);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
