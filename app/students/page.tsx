@@ -31,6 +31,7 @@ export default function StudentsPage() {
 
   useEffect(() => {
     filterAndSortStudents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [students, searchTerm, sortBy, filterOrg]);
 
   const fetchStudents = async () => {
@@ -237,6 +238,7 @@ export default function StudentsPage() {
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
                     {student.profile_pic ? (
+                      // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src={student.profile_pic}
                         alt={student.student_name || student.github_username}

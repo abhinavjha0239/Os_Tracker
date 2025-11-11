@@ -35,6 +35,7 @@ export default function LeaderboardPage() {
 
   useEffect(() => {
     filterLeaderboard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [leaderboard, selectedPeriod, selectedOrg, limit]);
 
   const fetchData = async () => {

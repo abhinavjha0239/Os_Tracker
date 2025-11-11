@@ -54,7 +54,7 @@ interface ContributionCardProps {
   contribution: {
     id: string | number;
     type: 'pull_request' | 'commit' | 'issue';
-    title: string;
+    title: string | null;
     url: string;
     created_at: string;
     student_id: number;

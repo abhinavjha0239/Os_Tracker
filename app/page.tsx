@@ -83,7 +83,7 @@ export default function DashboardPage() {
           {greeting}!
         </h1>
         <p className="mt-2 text-gray-600">
-          Here's your OS Tracker dashboard overview
+          Here&apos;s your OS Tracker dashboard overview
         </p>
         {error && (
           <div className="mt-4 rounded-lg border border-error/30 bg-error-light/50 p-4 text-sm text-red-700">

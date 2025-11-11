@@ -31,6 +31,7 @@ export default function MentorsPage() {
 
   useEffect(() => {
     filterAndSortMentors();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mentors, searchTerm, filterActive, sortBy]);
 
   const fetchMentors = async () => {

@@ -29,6 +29,7 @@ export default function OrganizationsPage() {
 
   useEffect(() => {
     filterAndSortOrganizations();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [organizations, searchTerm, sortBy, sizeFilter]);
 
   const fetchOrganizations = async () => {
@@ -218,7 +219,7 @@ export default function OrganizationsPage() {
             <option value="all">All Sizes</option>
             <option value="small">Small (≤10)</option>
             <option value="medium">Medium (11-50)</option>
-            <option value="large">Large (>50)</option>
+            <option value="large">Large (&gt;50)</option>
           </select>
         </div>
       </div>
